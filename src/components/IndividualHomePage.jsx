@@ -5,7 +5,7 @@ import {useParams} from "react-router-dom"
 import useHomeInfo from "../utils/useHomeInfo"
 import { useDispatch, useSelector } from "react-redux"
 import { addItem } from "../utils/cartSlice" 
-
+import {motion, AnimatePresence} from "framer-motion"
 
 const IndividualHomePage = () => {
 
@@ -47,9 +47,20 @@ const IndividualHomePage = () => {
 
     return(
     <div className="pt-18 sm:pt-20 px-5 sm:px-6 lg:px-10 max-w-3xl mx-auto flex flex-col gap-4 min-h-screen">
-        <div className="overflow-hidden rounded-3xl border border-blue-300">
-            <img src={images[currentImageIndex]} alt="home-image" className="w-full h-[250px] md:h-[350px] transition-all duration-500"></img>
-        </div> 
+        <div className="relative overflow-hidden rounded-3xl border border-blue-300/30 h-[250px] md:h-[350px] bg-slate-900">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={currentImageIndex}
+            src={images[currentImageIndex]}
+            alt={`${name} - preview ${currentImageIndex + 1}`}
+            initial={{ opacity: 0, x: 80 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -80 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            className="w-full h-full object-cover block"
+          />
+        </AnimatePresence>
+      </div>
         <div className="flex justify-center items-center gap-2">
                             <div onClick={()=> setCurrentImageIndex(0)} className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 cursor-pointer  ${currentImageIndex === 0? "bg-gradient-to-b from-blue-600 to-blue-400 shadow-[0_0_12px_rgba(96,165,250,0.9)] scale-110": "bg-white/90"} `}/>
                             <div onClick={()=> setCurrentImageIndex(1)}className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 cursor-pointer ${currentImageIndex === 1? "bg-gradient-to-b from-blue-600 to-blue-400 shadow-[0_0_12px_rgba(96,165,250,0.9)] scale-110": "bg-white/90"}`}/>
