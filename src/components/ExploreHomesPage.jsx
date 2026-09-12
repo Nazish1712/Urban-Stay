@@ -158,6 +158,7 @@ const ExploreHomesPage =() => {
                 onClick={() => {
                   const highRatingList = listOfHomes.filter((home) => home.info.rating > 4.5)
                   setFilteredHomes(highRatingList)
+                  setSearchText("")
                   setActiveFilter("highRating")
                 }}
               >
@@ -174,6 +175,7 @@ const ExploreHomesPage =() => {
                 onClick={() => {
                   const lowPriceList = listOfHomes.filter((home) => home.info.pricePerDay < 1500)
                   setFilteredHomes(lowPriceList)
+                  setSearchText("")
                   setActiveFilter("lowestPrice")
                 }}
               >
