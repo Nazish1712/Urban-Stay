@@ -68,6 +68,8 @@ const ExploreHomesPage =() => {
      const handleSearch = (query) => {
         const term = query.trim().toLowerCase()
         
+        setActiveFilter("")
+
         const searchHomes = listOfHomes.filter((home) => {
           const name = (home?.info?.name || "").toLowerCase()
           const locality = (home?.info?.locality || "").toLowerCase()
@@ -79,7 +81,7 @@ const ExploreHomesPage =() => {
             locality.includes(term) ||
             area.includes(term) ||
             fullLocation.includes(term) ||
-            term.includes(locality) // Handles clicking "Malviya Nagar, Jaipur"
+            term.includes(locality) 
           )
         })
       
